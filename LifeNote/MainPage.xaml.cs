@@ -1,5 +1,8 @@
 ﻿namespace LifeNote;
 
+/// <summary>
+///  MainPage.xaml 文件定义用户界面UI
+/// </summary>
 public partial class MainPage : ContentPage
 {
 	int count = 0;
