@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LifeNote.NotePage"
+             Title="Note">
+    <VerticalStackLayout Spacing="10" Margin="5">
+        <!--多行文本编辑器控件-->
+        <Editor x:Name="TextEditor"
+                Placeholder="Enter your note"
+                HeightRequest="100" />
+        <!--<Grid>是布局控件
+        此控件定义用于创建单元格的列和行。 子控件放置在这些单元格中。
+        默认情况下， Grid 控件包含单个行和一列，创建单个单元格。 用宽度定义列，宽度 * 值指示列尽可能多地填充空间。 -->
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
+            <Button Text="Save"
+                    Clicked="btnSave_Clicked" />
+
+            <Button Grid.Column="1"
+                    Text="Delete"
+                    Clicked="btnDelete_Clicked" />
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>
