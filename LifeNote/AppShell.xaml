@@ -3,18 +3,18 @@
     x:Class="LifeNote.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:LifeNote"
+    xmlns:views="clr-namespace:LifeNote.Views"
     Shell.FlyoutBehavior="Disabled">
-
+    <!--声明 XML 命名空间以在同一程序集中导入 .NET 命名空间的格式为：xmlns:{XML namespace name}="clr-namespace:{.NET namespace}"-->
     <TabBar>
         <ShellContent
             Title="Notes"
-            ContentTemplate="{DataTemplate local:NotePage}"
+            ContentTemplate="{DataTemplate views:AllNotesPage}"
             Icon="icon_notes" />
 
         <ShellContent
             Title="About"
-            ContentTemplate="{DataTemplate local:AboutPage}"
+            ContentTemplate="{DataTemplate views:AboutPage}"
             Icon="icon_about" />
     </TabBar>
 

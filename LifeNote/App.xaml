@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:LifeNote"
              x:Class="LifeNote.App">
+    <!--App.xaml 文件包含应用范围的 XAML 资源，例如颜色、样式或模板。-->
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:LifeNote.Models"
+             x:Class="LifeNote.Views.AboutPage"
+             Title="AboutPage">
+    <!--xmlns:models="clr-namespace:Notes.Models"
+    此行将 LifeNote.Models .NET 命名空间映射到 models XML 命名空间。-->
+    <!--BindingContext的 ContentPage 属性设置为 类的Note.Models.About实例，使用 的 models:AboutXML 命名空间和 对象。 
+    这是使用 属性元素语法 而不是 XML 特性设置的。-->
+    <ContentPage.BindingContext>
+        <models:About />
+    </ContentPage.BindingContext>
+    <VerticalStackLayout Spacing="10" Margin="10">
+        <HorizontalStackLayout Spacing="10">
+            <Image Source="dotnet_bot.png"
+                   SemanticProperties.Description="The dot net bot waving hello!"
+                   HeightRequest="64" />
+            <Label FontSize="22" FontAttributes="Bold" Text="{Binding Title}" VerticalOptions="End" />
+            <Label FontSize="22" Text="{Binding Version}" VerticalOptions="End" />
+        </HorizontalStackLayout>
+
+        <Label Text="{Binding Message}" />
+        <Button Text="Learn more..." Clicked="LearnMore_Clicked" />
+    </VerticalStackLayout>
+</ContentPage>

@@ -8,5 +8,8 @@ public partial class AppShell : Shell
 	public AppShell()
 	{
 		InitializeComponent();
-	}
+
+        //Every page that can be navigated to from another page, needs to be registered with the navigation system.
+        Routing.RegisterRoute(nameof(Views.NotePage), typeof(Views.NotePage));
+    }
 }
