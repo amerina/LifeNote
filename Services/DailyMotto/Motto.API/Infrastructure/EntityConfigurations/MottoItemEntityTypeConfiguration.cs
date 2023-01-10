@@ -31,6 +31,10 @@ namespace Motto.API.Infrastructure.EntityConfigurations
             builder.HasOne(ci => ci.MottoType)
                  .WithMany()
                  .HasForeignKey(ci => ci.MottoTypeId);
+
+            builder.Navigation(x => x.MottoLanguage).AutoInclude();
+
+            builder.Navigation(x => x.MottoType).AutoInclude();
         }
 
     }
