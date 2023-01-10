@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Motto.API.Infrastructure;
 using Motto.API.Model;
 using Polly;
 using System.Net;
-using System.Runtime;
 using System.Security.Cryptography;
 
 namespace Motto.API.Controllers
