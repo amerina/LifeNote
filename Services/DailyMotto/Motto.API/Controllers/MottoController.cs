@@ -58,19 +58,42 @@ namespace Motto.API.Controllers
         }
 
         [HttpGet]
-        [Route("items/randomitem")]
+        [Route("items/random")]
         [ProducesResponseType(typeof(MottoItem), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<MottoItem>> ItemByRandomAsync()
+        public async Task<ActionResult<MottoItem>> ItemByRandomAsync([FromQuery] int languageId = 0)
         {
             return await Policy.HandleResult<MottoItem>(x => x == null).RetryAsync(5).ExecuteAsync(async () =>
             {
-                var totalItems = await _mottoContext.MottoItems.CountAsync();
+                try
+                {
+                    var totalItems = 0;
+                    if (languageId > 0)
+                    {
+                        totalItems = await _mottoContext.MottoItems.CountAsync(o => o.MottoLanguageId == languageId);
+                        if (totalItems == 0)
+                        {
+                            goto Random;
+                        }
 
-                var randomId = RandomNumberGenerator.GetInt32(totalItems);
+                        var randomIndex = RandomNumberGenerator.GetInt32(1, totalItems) - 1;
 
-                var item = await _mottoContext.MottoItems.FirstOrDefaultAsync(o => o.Id == randomId);
+                        return await _mottoContext.MottoItems.Where(o => o.MottoLanguageId == languageId).Skip(randomIndex).FirstOrDefaultAsync();
+                    }
 
-                return item;
+                Random:
+                    totalItems = await _mottoContext.MottoItems.CountAsync();
+
+                    var randomId = RandomNumberGenerator.GetInt32(totalItems);
+
+                    return await _mottoContext.MottoItems.FirstOrDefaultAsync(o => o.Id == randomId);
+
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+
+
             });
         }
 

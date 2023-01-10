@@ -60,8 +60,9 @@ Serilog.ILogger CreateSerilogLogger(IConfiguration configuration)
         .Enrich.WithProperty("ApplicationContext", Constants.AppName)
         .Enrich.FromLogContext()
         .WriteTo.Console()
-        .WriteTo.Seq(string.IsNullOrWhiteSpace(seqServerUrl) ? "http://seq" : seqServerUrl)
-        .WriteTo.Http(string.IsNullOrWhiteSpace(logstashUrl) ? "http://logstash:8080" : logstashUrl, null)
+        //.WriteTo.File(Path.Combine("logs", @"log.txt"), rollingInterval: RollingInterval.Day)
+        .WriteTo.Seq(string.IsNullOrWhiteSpace(seqServerUrl) ? "http://locahost:5340" : seqServerUrl)
+        .WriteTo.Http(string.IsNullOrWhiteSpace(logstashUrl) ? "http://locahost:8080" : logstashUrl, null)
         .ReadFrom.Configuration(configuration)
         .CreateLogger();
 }
@@ -72,17 +73,6 @@ IConfiguration GetConfiguration()
         .SetBasePath(Directory.GetCurrentDirectory())
         .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
         .AddEnvironmentVariables();
-
-    var config = builder.Build();
-
-    if (config.GetValue<bool>("UseVault", false))
-    {
-        TokenCredential credential = new ClientSecretCredential(
-            config["Vault:TenantId"],
-            config["Vault:ClientId"],
-            config["Vault:ClientSecret"]);
-        //builder.AddAzureKeyVault(new Uri($"https://{config["Vault:Name"]}.vault.azure.net/"), credential);        
-    }
 
     return builder.Build();
 }
